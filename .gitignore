@@ -34,3 +34,4 @@ frontend/.pub/
 
 # Entregables locales (no versionar PDF de entrega según indicación)
 entregables/
+.venv_pdf/
