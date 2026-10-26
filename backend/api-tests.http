@@ -1,0 +1,108 @@
+### Variables
+@baseUrl = http://localhost:3000/api
+
+### 1. Listar todos los productos (GET 200)
+GET {{baseUrl}}/productos
+Accept: application/json
+
+### 2. Obtener un producto por ID existente (GET 200)
+GET {{baseUrl}}/productos/1
+Accept: application/json
+
+### 3. Obtener un producto por ID inexistente (GET 404)
+GET {{baseUrl}}/productos/9999
+Accept: application/json
+
+### 4. Crear un producto válido (POST 201)
+POST {{baseUrl}}/productos
+Content-Type: application/json
+
+{
+  "nombre": "Micrófono Condensador USB",
+  "codigo": "MIC-001",
+  "descripcion": "Micrófono cardioide con trípode y filtro anti-pop",
+  "precio": 135000.0,
+  "cantidad": 12,
+  "categoria": "Audio"
+}
+
+### 5. Crear producto con error de validación - Campos obligatorios vacíos (POST 422)
+POST {{baseUrl}}/productos
+Content-Type: application/json
+
+{
+  "nombre": "",
+  "codigo": "",
+  "precio": null,
+  "cantidad": null,
+  "categoria": ""
+}
+
+### 6. Crear producto con error de validación - Precio negativo y cantidad decimal (POST 422)
+POST {{baseUrl}}/productos
+Content-Type: application/json
+
+{
+  "nombre": "Producto Invalido",
+  "codigo": "INV-001",
+  "precio": -500,
+  "cantidad": 3.5,
+  "categoria": "Pruebas"
+}
+
+### 7. Crear producto con código duplicado (POST 422)
+POST {{baseUrl}}/productos
+Content-Type: application/json
+
+{
+  "nombre": "Mouse Duplicado",
+  "codigo": "TEC-001",
+  "precio": 50000,
+  "cantidad": 5,
+  "categoria": "Tecnología"
+}
+
+### 8. Actualizar un producto existente con datos válidos (PUT 200)
+PUT {{baseUrl}}/productos/1
+Content-Type: application/json
+
+{
+  "nombre": "Mouse Inalámbrico Ergonómico Pro",
+  "codigo": "TEC-001",
+  "descripcion": "Versión Pro actualizada con batería de larga duración y sensor óptico 2400 DPI",
+  "precio": 52000.0,
+  "cantidad": 20,
+  "categoria": "Tecnología"
+}
+
+### 9. Actualizar producto inexistente (PUT 404)
+PUT {{baseUrl}}/productos/9999
+Content-Type: application/json
+
+{
+  "nombre": "No Existe",
+  "codigo": "NOEX-999",
+  "precio": 10000,
+  "cantidad": 1,
+  "categoria": "General"
+}
+
+### 10. Actualizar producto con código de otro producto existente (PUT 422)
+PUT {{baseUrl}}/productos/1
+Content-Type: application/json
+
+{
+  "nombre": "Conflicto de código",
+  "codigo": "TEC-002",
+  "precio": 45000,
+  "cantidad": 10,
+  "categoria": "Tecnología"
+}
+
+### 11. Eliminar un producto existente (DELETE 200)
+DELETE {{baseUrl}}/productos/12
+Accept: application/json
+
+### 12. Eliminar un producto inexistente (DELETE 404)
+DELETE {{baseUrl}}/productos/9999
+Accept: application/json
