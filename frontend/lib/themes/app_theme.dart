@@ -18,16 +18,28 @@ class AppTheme {
       brightness: Brightness.light,
     );
 
-    return ThemeData(
+    final rawTheme = ThemeData(
       useMaterial3: true,
+      fontFamily: 'Roboto',
       colorScheme: colorScheme,
       scaffoldBackgroundColor: surfaceColor,
+    );
+
+    final textTheme = rawTheme.textTheme.apply(fontFamily: 'Roboto');
+    final primaryTextTheme = rawTheme.primaryTextTheme.apply(
+      fontFamily: 'Roboto',
+    );
+
+    return rawTheme.copyWith(
+      textTheme: textTheme,
+      primaryTextTheme: primaryTextTheme,
       appBarTheme: const AppBarTheme(
         centerTitle: false,
         elevation: 0,
         backgroundColor: primaryColor,
         foregroundColor: Colors.white,
         titleTextStyle: TextStyle(
+          fontFamily: 'Roboto',
           color: Colors.white,
           fontSize: 20,
           fontWeight: FontWeight.w700,
@@ -77,7 +89,11 @@ class AppTheme {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
-          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          textStyle: const TextStyle(
+            fontFamily: 'Roboto',
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
