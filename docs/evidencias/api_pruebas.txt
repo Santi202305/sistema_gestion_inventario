@@ -1,0 +1,204 @@
+==========================================================
+EVIDENCIAS DE PRUEBAS DE LA API REST - SISTEMA DE INVENTARIO
+Fecha y hora: lun 26 oct 2026 13:40:10 -05
+Base URL: http://localhost:3000/api
+==========================================================
+
+----------------------------------------------------------
+PRUEBA: 1. Listar todos los productos
+METODO: GET http://localhost:3000/api/productos
+RESPUESTA HTTP:
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 2617
+ETag: W/"a39-hi1VuH0x3CGAKK6Z0blYs68JuI4"
+Date: Mon, 26 Oct 2026 18:40:10 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+[{"id":1,"nombre":"Mouse Inalámbrico Ergonómico","codigo":"TEC-001","descripcion":"Mouse óptico 2.4GHz con sensor ajustable hasta 1600 DPI y batería recargable","precio":45000,"cantidad":25,"categoria":"Tecnología"},{"id":2,"nombre":"Teclado Mecánico RGB","codigo":"TEC-002","descripcion":"Teclado mecánico compacto con switches azules y retroiluminación personalizable","precio":185000,"cantidad":14,"categoria":"Tecnología"},{"id":3,"nombre":"Monitor LED 24 Pulgadas FHD","codigo":"TEC-003","descripcion":"Monitor panel IPS con resolución 1080p, tasa de refresco 75Hz y entradas HDMI/VGA","precio":520000,"cantidad":8,"categoria":"Tecnología"},{"id":4,"nombre":"Audífonos Bluetooth con Micrófono","codigo":"ACC-001","descripcion":"Diadema inalámbrica con cancelación pasiva de ruido y autonomía de 20 horas","precio":98000,"cantidad":30,"categoria":"Accesorios"},{"id":5,"nombre":"Cable HDMI 2.0 Trenzado 2m","codigo":"ACC-002","descripcion":"Cable de alta velocidad apantallado compatible con 4K Ultra HD y conectores dorados","precio":22000,"cantidad":45,"categoria":"Accesorios"},{"id":6,"nombre":"Resma de Papel Carta 75g","codigo":"PAP-001","descripcion":"Paquete de 500 hojas multiusos para impresión láser e inyección de tinta","precio":18500,"cantidad":60,"categoria":"Papelería"},{"id":7,"nombre":"Cuaderno Argollado 100 Hojas","codigo":"PAP-002","descripcion":"Cuaderno universitario de pasta dura plastificada con hojas cuadriculadas","precio":9500,"cantidad":50,"categoria":"Papelería"},{"id":8,"nombre":"Caja de Bolígrafos Tinta Negra 12u","codigo":"PAP-003","descripcion":"Bolígrafos punto fino 0.7mm con tinta gel de secado instantáneo","precio":14000,"cantidad":35,"categoria":"Papelería"},{"id":9,"nombre":"Alcohol Isopropílico 1 Litro","codigo":"LIM-001","descripcion":"Limpiador solvente al 99.8% puro para circuitos, pantallas y equipos electrónicos","precio":28000,"cantidad":20,"categoria":"Limpieza"},{"id":10,"nombre":"Kit Limpiador de Pantallas y Paño","codigo":"LIM-002","descripcion":"Solución antiestática de 250ml sin alcohol acompañada de toalla de microfibra","precio":16500,"cantidad":28,"categoria":"Limpieza"},{"id":11,"nombre":"Silla Ergonómica de Oficina","codigo":"MUE-001","descripcion":"Silla giratoria con soporte lumbar regulable, respaldo en malla y pistón clase 4","precio":420000,"cantidad":6,"categoria":"Mobiliario"},{"id":12,"nombre":"Soporte Elevador para Laptop","codigo":"MUE-002","descripcion":"Estructura en aleación de aluminio plegable con 6 posiciones de ajuste angular","precio":65000,"cantidad":18,"categoria":"Mobiliario"}]
+
+----------------------------------------------------------
+PRUEBA: 2. Obtener producto por ID existente (ID 1)
+METODO: GET http://localhost:3000/api/productos/1
+RESPUESTA HTTP:
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 219
+ETag: W/"db-rDGJrE6zd9qGvYIJLwoIuEsL52s"
+Date: Mon, 26 Oct 2026 18:40:10 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"id":1,"nombre":"Mouse Inalámbrico Ergonómico","codigo":"TEC-001","descripcion":"Mouse óptico 2.4GHz con sensor ajustable hasta 1600 DPI y batería recargable","precio":45000,"cantidad":25,"categoria":"Tecnología"}
+
+----------------------------------------------------------
+PRUEBA: 3. Obtener producto inexistente (404)
+METODO: GET http://localhost:3000/api/productos/9999
+RESPUESTA HTTP:
+HTTP/1.1 404 Not Found
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 36
+ETag: W/"24-Z3cwzsRolzRxD8Wt6LAibt/xaI4"
+Date: Mon, 26 Oct 2026 18:40:10 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"message":"Producto no encontrado"}
+
+----------------------------------------------------------
+PRUEBA: 4. Registrar nuevo producto válido
+METODO: POST http://localhost:3000/api/productos
+PAYLOAD ENVIADO: {"nombre":"Micrófono Condensador USB","codigo":"MIC-001","descripcion":"Micrófono cardioide con trípode y filtro anti-pop","precio":135000.0,"cantidad":12,"categoria":"Audio"}
+RESPUESTA HTTP:
+HTTP/1.1 201 Created
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 184
+ETag: W/"b8-ubvJX+e4MLNwGwGgHpUf7YqtCk4"
+Date: Mon, 26 Oct 2026 18:40:10 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"id":25,"nombre":"Micrófono Condensador USB","codigo":"MIC-001","descripcion":"Micrófono cardioide con trípode y filtro anti-pop","precio":135000,"cantidad":12,"categoria":"Audio"}
+
+----------------------------------------------------------
+PRUEBA: 5. Error 422 - Campos obligatorios vacíos
+METODO: POST http://localhost:3000/api/productos
+PAYLOAD ENVIADO: {"nombre":"","codigo":"","precio":null,"cantidad":null,"categoria":""}
+RESPUESTA HTTP:
+HTTP/1.1 422 Unprocessable Entity
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 243
+ETag: W/"f3-NUt2iF0Kz2g5G+bHH3Y6QXVO144"
+Date: Mon, 26 Oct 2026 18:40:10 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"message":"Datos inválidos","errors":{"nombre":["El nombre es obligatorio"],"codigo":["El código es obligatorio"],"precio":["El precio es obligatorio"],"cantidad":["La cantidad es obligatoria"],"categoria":["La categoría es obligatoria"]}}
+
+----------------------------------------------------------
+PRUEBA: 6. Error 422 - Precio negativo y cantidad decimal
+METODO: POST http://localhost:3000/api/productos
+PAYLOAD ENVIADO: {"nombre":"Producto Invalido","codigo":"INV-001","precio":-500,"cantidad":3.5,"categoria":"Pruebas"}
+RESPUESTA HTTP:
+HTTP/1.1 422 Unprocessable Entity
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 139
+ETag: W/"8b-IW/EBjLKzEE4PCA934JUxZN1eds"
+Date: Mon, 26 Oct 2026 18:40:10 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"message":"Datos inválidos","errors":{"precio":["El precio debe ser mayor que 0"],"cantidad":["La cantidad debe ser un número entero"]}}
+
+----------------------------------------------------------
+PRUEBA: 7. Error 422 - Código duplicado en POST
+METODO: POST http://localhost:3000/api/productos
+PAYLOAD ENVIADO: {"nombre":"Mouse Duplicado","codigo":"TEC-001","precio":50000,"cantidad":5,"categoria":"Tecnología"}
+RESPUESTA HTTP:
+HTTP/1.1 422 Unprocessable Entity
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 85
+ETag: W/"55-EKTw1lPE15KIYdq+M2KpKTpP1Kg"
+Date: Mon, 26 Oct 2026 18:40:10 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"message":"Datos inválidos","errors":{"codigo":["El código ya está registrado"]}}
+
+----------------------------------------------------------
+PRUEBA: 8. Actualizar producto existente con datos válidos
+METODO: PUT http://localhost:3000/api/productos/1
+PAYLOAD ENVIADO: {"nombre":"Mouse Inalámbrico Ergonómico Pro","codigo":"TEC-001","descripcion":"Versión Pro actualizada con batería de larga duración y sensor óptico 2400 DPI","precio":52000.0,"cantidad":20,"categoria":"Tecnología"}
+RESPUESTA HTTP:
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 227
+ETag: W/"e3-NMfp9RtfN5HfcLaIIAVDjgXXUiw"
+Date: Mon, 26 Oct 2026 18:40:10 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"id":1,"nombre":"Mouse Inalámbrico Ergonómico Pro","codigo":"TEC-001","descripcion":"Versión Pro actualizada con batería de larga duración y sensor óptico 2400 DPI","precio":52000,"cantidad":20,"categoria":"Tecnología"}
+
+----------------------------------------------------------
+PRUEBA: 9. Actualizar producto inexistente (404)
+METODO: PUT http://localhost:3000/api/productos/9999
+PAYLOAD ENVIADO: {"nombre":"No Existe","codigo":"NOEX-999","precio":10000,"cantidad":1,"categoria":"General"}
+RESPUESTA HTTP:
+HTTP/1.1 404 Not Found
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 36
+ETag: W/"24-Z3cwzsRolzRxD8Wt6LAibt/xaI4"
+Date: Mon, 26 Oct 2026 18:40:10 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"message":"Producto no encontrado"}
+
+----------------------------------------------------------
+PRUEBA: 10. Error 422 - Código duplicado de otro producto en PUT
+METODO: PUT http://localhost:3000/api/productos/1
+PAYLOAD ENVIADO: {"nombre":"Conflicto de código","codigo":"TEC-002","precio":45000,"cantidad":10,"categoria":"Tecnología"}
+RESPUESTA HTTP:
+HTTP/1.1 422 Unprocessable Entity
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 85
+ETag: W/"55-EKTw1lPE15KIYdq+M2KpKTpP1Kg"
+Date: Mon, 26 Oct 2026 18:40:10 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"message":"Datos inválidos","errors":{"codigo":["El código ya está registrado"]}}
+
+----------------------------------------------------------
+PRUEBA: 11. Eliminar producto existente (ID 12)
+METODO: DELETE http://localhost:3000/api/productos/12
+RESPUESTA HTTP:
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 46
+ETag: W/"2e-MDko6UZvQDY/QWWoNlpiwZdYHIw"
+Date: Mon, 26 Oct 2026 18:40:10 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"message":"Producto eliminado correctamente"}
+
+----------------------------------------------------------
+PRUEBA: 12. Eliminar producto inexistente (404)
+METODO: DELETE http://localhost:3000/api/productos/9999
+RESPUESTA HTTP:
+HTTP/1.1 404 Not Found
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 36
+ETag: W/"24-Z3cwzsRolzRxD8Wt6LAibt/xaI4"
+Date: Mon, 26 Oct 2026 18:40:10 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"message":"Producto no encontrado"}

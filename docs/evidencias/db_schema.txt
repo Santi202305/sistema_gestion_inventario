@@ -1,0 +1,10 @@
+CREATE TABLE productos (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nombre TEXT NOT NULL,
+    codigo TEXT NOT NULL UNIQUE,
+    descripcion TEXT,
+    precio REAL NOT NULL,
+    cantidad INTEGER NOT NULL,
+    categoria TEXT NOT NULL
+  );
+CREATE TABLE sqlite_sequence(name,seq);

@@ -1,0 +1,14 @@
+id                nombre                codigo                                       descripcion                                       precio   cantidad  categoria
+--  ----------------------------------  -------  -----------------------------------------------------------------------------------  --------  --------  ----------
+ 1  Mouse Inalámbrico Ergonómico Pro    TEC-001  Versión Pro actualizada con batería de larga duración y sensor óptico 2400 DPI        52000.0        20  Tecnología
+ 2  Teclado Mecánico RGB                TEC-002  Teclado mecánico compacto con switches azules y retroiluminación personalizable      185000.0        14  Tecnología
+ 3  Monitor LED 24 Pulgadas FHD         TEC-003  Monitor panel IPS con resolución 1080p, tasa de refresco 75Hz y entradas HDMI/VGA    520000.0         8  Tecnología
+ 4  Audífonos Bluetooth con Micrófono   ACC-001  Diadema inalámbrica con cancelación pasiva de ruido y autonomía de 20 horas           98000.0        30  Accesorios
+ 5  Cable HDMI 2.0 Trenzado 2m          ACC-002  Cable de alta velocidad apantallado compatible con 4K Ultra HD y conectores dorados   22000.0        45  Accesorios
+ 6  Resma de Papel Carta 75g            PAP-001  Paquete de 500 hojas multiusos para impresión láser e inyección de tinta              18500.0        60  Papelería
+ 7  Cuaderno Argollado 100 Hojas        PAP-002  Cuaderno universitario de pasta dura plastificada con hojas cuadriculadas              9500.0        50  Papelería
+ 8  Caja de Bolígrafos Tinta Negra 12u  PAP-003  Bolígrafos punto fino 0.7mm con tinta gel de secado instantáneo                       14000.0        35  Papelería
+ 9  Alcohol Isopropílico 1 Litro        LIM-001  Limpiador solvente al 99.8% puro para circuitos, pantallas y equipos electrónicos     28000.0        20  Limpieza
+10  Kit Limpiador de Pantallas y Paño   LIM-002  Solución antiestática de 250ml sin alcohol acompañada de toalla de microfibra         16500.0        28  Limpieza
+11  Silla Ergonómica de Oficina         MUE-001  Silla giratoria con soporte lumbar regulable, respaldo en malla y pistón clase 4     420000.0         6  Mobiliario
+25  Micrófono Condensador USB           MIC-001  Micrófono cardioide con trípode y filtro anti-pop                                    135000.0        12  Audio
