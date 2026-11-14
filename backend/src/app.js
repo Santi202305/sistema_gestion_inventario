@@ -4,6 +4,7 @@ const cors = require('cors');
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
 const productoRoutes = require('./routes/producto.routes');
+const authRoutes = require('./routes/auth.routes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -24,6 +25,7 @@ app.use((req, res, next) => {
 });
 
 // Rutas principales bajo el prefijo /api
+app.use('/api/auth', authRoutes);
 app.use('/api/productos', productoRoutes);
 
 // Ruta base para healthcheck
@@ -33,6 +35,7 @@ app.get('/api', (req, res) => {
     version: '1.0.0',
     status: 'online',
     endpoints: {
+      auth: '/api/auth/login',
       productos: '/api/productos'
     }
   });
