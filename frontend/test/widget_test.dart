@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frontend/models/producto.dart';
+import 'package:frontend/models/usuario.dart';
 
 void main() {
   group('Pruebas unitarias de modelo Producto', () {
@@ -44,6 +45,27 @@ void main() {
       expect(json['cantidad'], equals(20));
       expect(json['categoria'], equals('Accesorios'));
       expect(json.containsKey('id'), isFalse);
+    });
+  });
+
+  group('Pruebas unitarias de modelo Usuario', () {
+    test('fromJson y toJson serializan correctamente', () {
+      final json = {
+        'id': 1,
+        'nombre': 'Administrador del Sistema',
+        'email': 'admin@inventario.com',
+      };
+
+      final usuario = Usuario.fromJson(json);
+
+      expect(usuario.id, equals(1));
+      expect(usuario.nombre, equals('Administrador del Sistema'));
+      expect(usuario.email, equals('admin@inventario.com'));
+
+      final jsonResult = usuario.toJson();
+      expect(jsonResult['id'], equals(1));
+      expect(jsonResult['nombre'], equals('Administrador del Sistema'));
+      expect(jsonResult['email'], equals('admin@inventario.com'));
     });
   });
 }

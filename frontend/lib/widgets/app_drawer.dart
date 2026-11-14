@@ -100,20 +100,54 @@ class AppDrawer extends StatelessWidget {
               context.pushNamed('producto-nuevo');
             },
           ),
+          ListTile(
+            leading: Icon(
+              Icons.account_circle_outlined,
+              color: currentRoute == '/sesion'
+                  ? const Color(0xFF1E3A8A)
+                  : Colors.grey.shade600,
+            ),
+            title: const Text('Información de Sesión'),
+            selected: currentRoute == '/sesion',
+            selectedTileColor: const Color(0xFF1E3A8A).withValues(alpha: 0.08),
+            onTap: () {
+              Navigator.of(context).pop();
+              if (currentRoute != '/sesion') {
+                context.goNamed('sesion');
+              }
+            },
+          ),
           const Spacer(),
           const Divider(),
+          ListTile(
+            leading: const Icon(Icons.logout_rounded, color: Color(0xFFDC2626)),
+            title: const Text(
+              'Cerrar Sesión',
+              style: TextStyle(
+                color: Color(0xFFDC2626),
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            onTap: () {
+              Navigator.of(context).pop();
+              context.goNamed('sesion');
+            },
+          ),
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16.0,
+              vertical: 8.0,
+            ),
             child: Row(
               children: [
                 Icon(
-                  Icons.info_outline_rounded,
+                  Icons.lock_outline_rounded,
                   size: 16,
                   color: Colors.grey.shade500,
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  'API REST + Flutter • v1.0.0',
+                  'API REST + Flutter JWT • v2.0',
                   style: TextStyle(fontSize: 11, color: Colors.grey.shade500),
                 ),
               ],
