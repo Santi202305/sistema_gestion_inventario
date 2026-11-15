@@ -99,6 +99,8 @@ const productosSemilla = [
   },
 ];
 
+const bcrypt = require('bcryptjs');
+
 function seed() {
   console.log('Iniciando poblamiento de base de datos (seed)...');
 
@@ -122,7 +124,24 @@ function seed() {
   runSeed(productosSemilla);
 
   const total = db.prepare('SELECT COUNT(*) as count FROM productos').get().count;
-  console.log(`Poblamiento finalizado con éxito. Total de productos en la base de datos: ${total}`);
+  console.log(`Productos sincronizados con éxito. Total: ${total}`);
+
+  // Poblamiento de usuario de prueba
+  const emailAdmin = 'admin@inventario.com';
+  const passPlana = 'Admin123*';
+  const salt = bcrypt.genSaltSync(10);
+  const passwordHash = bcrypt.hashSync(passPlana, salt);
+
+  const insertUserStmt = db.prepare(`
+    INSERT INTO usuarios (nombre, email, password)
+    VALUES (?, ?, ?)
+    ON CONFLICT(email) DO UPDATE SET
+      nombre = excluded.nombre,
+      password = excluded.password
+  `);
+
+  insertUserStmt.run('Administrador del Sistema', emailAdmin, passwordHash);
+  console.log(`Usuario de prueba listo: ${emailAdmin} (contraseña hasheada con bcrypt)`);
 }
 
 seed();

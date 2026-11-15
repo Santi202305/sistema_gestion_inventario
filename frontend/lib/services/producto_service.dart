@@ -3,14 +3,21 @@ import 'package:dio/dio.dart';
 import '../config/env_config.dart';
 import '../models/producto.dart';
 import 'api_exception.dart';
+import 'auth_interceptor.dart';
+import 'storage_service.dart';
 
 class ProductoService {
   late final Dio _dio;
 
-  ProductoService({Dio? customDio}) {
+  ProductoService({
+    Dio? customDio,
+    StorageService? storageService,
+    void Function()? onUnauthorized,
+  }) {
     if (customDio != null) {
       _dio = customDio;
     } else {
+      final storage = storageService ?? StorageService();
       _dio = Dio(
         BaseOptions(
           baseUrl: EnvConfig.baseUrl,
@@ -20,6 +27,14 @@ class ProductoService {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
           },
+        ),
+      );
+
+      // Agregar interceptor de autenticación para inyectar token Bearer y manejar 401
+      _dio.interceptors.add(
+        AuthInterceptor(
+          storageService: storage,
+          onUnauthorized: onUnauthorized,
         ),
       );
     }
